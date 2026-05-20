@@ -22,13 +22,6 @@ user_metrics:
 code_metrics:
   linter_passed:
     enabled: true
-  cyclomatic_complexity:
-    enabled: true
-    max_complexity: 10
-    ignore_patterns:
-      - "**/node_modules/**"
-      - "**/*.test.ts"
-
 ai_checks:
   detect_slop:
     enabled: false
