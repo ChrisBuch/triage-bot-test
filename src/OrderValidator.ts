@@ -39,4 +39,8 @@ export class OrderValidator {
   calculateTotal(order: Order): number {
     return order.items.reduce((sum, item) => sum + item.quantity * item.pricePerUnit, 0);
   }
+
+  isCancellable(order: Order): boolean {
+    return order.status === 'pending' || order.status === 'confirmed';
+  }
 }
