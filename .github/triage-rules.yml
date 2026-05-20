@@ -1,0 +1,42 @@
+triage_levels:
+  - name: blocker
+    triggers: [linter_passed]
+    actions: [comment_structured_error, request_changes, label_blocked]
+
+  - name: quality-warning
+    triggers: [duplication, cyclomatic_complexity, account_age]
+    actions: [label_needs-improvement, comment_structured_error]
+
+  - name: approved
+    triggers: []
+    actions: [approve, remove_label_needs-improvement, label_ready-to-merge]
+
+user_metrics:
+  account_age:
+    enabled: true
+    min_days: 3
+  point_system:
+    enabled: false
+    min_score: 5
+
+code_metrics:
+  linter_passed:
+    enabled: true
+  duplication:
+    enabled: true
+    max_percentage: 10
+    ignore_patterns:
+      - "**/node_modules/**"
+      - "**/dist/**"
+  cyclomatic_complexity:
+    enabled: true
+    max_complexity: 10
+    ignore_patterns:
+      - "**/node_modules/**"
+      - "**/*.test.ts"
+
+ai_checks:
+  detect_slop:
+    enabled: false
+    strictness: high
+  review_quality: []
