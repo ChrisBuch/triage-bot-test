@@ -46,6 +46,12 @@ describe('OrderValidator', () => {
     expect(result.valid).toBe(false);
   });
 
+  it('should allow cancellation for pending and confirmed orders', () => {
+    expect(validator.isCancellable({ ...validOrder, status: 'pending' })).toBe(true);
+    expect(validator.isCancellable({ ...validOrder, status: 'confirmed' })).toBe(true);
+    expect(validator.isCancellable({ ...validOrder, status: 'shipped' })).toBe(false);
+  });
+
   it('should calculate the correct total', () => {
     const total = validator.calculateTotal({
       ...validOrder,
